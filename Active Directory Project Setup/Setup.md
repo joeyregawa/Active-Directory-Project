@@ -20,3 +20,26 @@ Download the Windows Server 2022 ISO from https://www.microsoft.com/en-us/evalce
 Visit https://ubuntu.com/server to download Ubuntu Server, specifically version 24.04.1 LTS for this lab. In Oracle VM VirtualBox Manager, create a new virtual machine using the ISO, allocate 8192MB of RAM, assign 2 CPUs, and set up a 100GB virtual disk, then complete the setup. Start the virtual machine, select "Try or Install Ubuntu Server," and navigate through the series of "Done" and "Continue" prompts, filling out the required form before proceeding with the installation. After the installation, reboot the system. You may encounter error messages. Once the system has rebooted, log in and execute the command `sudo apt-get update && sudo apt-get upgrade -y`. After the process finishes, press "Enter."
 
 # **2. VM and Network Configuration**
+## **2.1. Create a Network using NAT Network**
+Click Tools and select network, than select the NAT Networks tabs than click create. In this project we will use 192.168.10.0/24 as our Network.
+
+![alt text](<../Images/Nat Network.png>)
+
+## **2.2. Splunk Server**
+### **2.2. Setup Splunk Server Connection**
+
+At VirtualBox Home, select Splunk server > settings > Network > change the network adapter to the NAT network that we created earlier and click ok. after that we can start the Splunk Server to configure manually the IP address for the Splunk Server based on the Diagram we create.
+
+        sudo nano /etc/netplan/50-cloud-init.yaml
+
+![alt text](<../Images/Splunk Server Configuration (2).png>)
+
+change to
+
+![alt text](<../Images/Splunk Server Configuration (3).png>)
+
+then type:
+
+        sudo netplan apply
+
+![alt text](<../Images/Splunk Server Configuration (1).png>)
