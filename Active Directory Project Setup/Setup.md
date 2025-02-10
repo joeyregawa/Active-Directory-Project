@@ -156,5 +156,62 @@ objective:
 - open your windows Server manager.
 - Navigate to Manage > Add Roles & Features > select “Next” > select Role-based for feature-based installation > click “Next” > click “Next” > Select ”Active Directory Domain Services” > click “Add Features” > keep on clicking “Next” until you can select Install.
 
+![alt text](<../Images/Windows Server Configuration (1).png>)
+
+- After receive the message Configuration required. Installation succeeded on ADDC01, click the flag icon beside manage.
+
+![alt text](<../Images/Windows Server Configuration (2).png>)
+
+- select "Promote this server to a domain controller” > Select "Add a new forest” (because we’re creating a brand new domain in this project) > create name at Root domain name (`<your domain name>`.local) > Next > Create a password > Next until the Configuration Wizard validates prerequisites, and then hit install. This should trigger you to be signed out and have the server restart.
+
+![alt text](<../Images/Windows Server Configuration (3).png>)
+
+![alt text](<../Images/Windows Server Configuration (4).png>)
+
+- the backslash indicate that we have successfully installed adds and promoted our sever to a domain controller.
+
+![alt text](<../Images/Windows Server Configuration (5).png>)
+
+- Next step is to create some users. Login to server > navigate to Tools > Active Directory Users and Computers
+
+![alt text](<../Images/Windows Server Configuration (6).png>)
+
+- Right-click explorelearn.local > New > Organizational Unit > Name: "IT". Right-click in the space of this new Organizational Unit > New > User. First name: "Jenny", Last name: "Smith", Full name: "Jenny Smith", User logon name: "jsmith". Create a password, uncheck user must change password at next log (because this is lab environment), then finish. Create a new Organizational Unit called "HR" and create another different user.
+
+![alt text](<../Images/Windows Server Configuration (7).png>)
+
+![alt text](<../Images/Windows Server Configuration (8).png>)
+*note: username: jsmith, pass: adsf1234QWER*
+
+![alt text](<../Images/Windows Server Configuration (9).png>)
+*note: username: tsmith, password: ASDFqwer1234*
+
+## **4.2. Windows 10 Target Machine Joins New Domain**
+
+- Search This PC > properties > select “Advanced system Settings” > Computer Name > Change > Select "Domain" > enter your domain name >  
+
+![alt text](<../Images/Windows Server Configuration (10).png>)
+
+![alt text](<../Images/Windows Server Configuration (11).png>)
+
+- We will get this error because the machine doesn’t know to resole the domain name. to fix this navigate to network adapter by clicking the network icon at the bottom right of the window > Open Network & Internet Settings > Change Adapter Options > Right-click adapter > Properties > Double-click Internet Protocol Version 4 (TCP/IPv4). Change the DNS to the Server (`192.168.10.7`). Head back to Computer Name/Domain Changes (this window should still be open), and select "OK". Login with the administrator credentials and restart the machine.
+
+![alt text](<../Images/Windows Server Configuration (12).png>)
+
+![alt text](<../Images/Windows Server Configuration (13).png>)
+
+![alt text](<../Images/Windows Server Configuration (14).png>)
+
+- After restart the machine, we will login to the target machine using our newly create user. In this project we will use user Jenny Smith. Simply select other user > login using Jenny Smith credential (username: jsmith, password: adsf1234QWER) and make sure our sign in to is pointing to our domain.
+
+![alt text](<../Images/Windows Server Configuration (15).png>)
+
+![alt text](<../Images/Windows Server Configuration (16).png>)
+
+![alt text](<../Images/Windows Server Configuration (17).png>)
+
+# **3. Kali Linux Brute Force Attack on the Target Machine, View Telemetry via Splunk, Setup & Install ART (Atomic Red Team)**
+## **5.1. Configure Kali Linux Network**
+
 
 
