@@ -210,8 +210,104 @@ objective:
 
 ![alt text](<../Images/Windows Server Configuration (17).png>)
 
-# **3. Kali Linux Brute Force Attack on the Target Machine, View Telemetry via Splunk, Setup & Install ART (Atomic Red Team)**
+# **5. Kali Linux Brute Force Attack on the Target Machine, View Telemetry via Splunk, Setup & Install ART (Atomic Red Team)**
 ## **5.1. Configure Kali Linux Network**
 
+- Change Connection on Kali Linux to static IP address (`192.168.10.250`) based on Diagram we designed.
+- Right Click “Ethernet Icon” > Select “Edit Connection” > Wired connection 1 > Click the Setting Icon > IPv4 Settings > change the “Method” to “Manual” > Add >Address: `192.168.10.250` > Netmask: `24` > Gateway: `192.168.10.1` > DNS servers: `8.8.8.8` > Save.
 
+![alt text](<../Images/Kali Linux Configuration and Crowbar Installation (1).png>)
 
+![alt text](<../Images/Kali Linux Configuration and Crowbar Installation (2).png>)
+
+![alt text](<../Images/Kali Linux Configuration and Crowbar Installation (3).png>)
+
+- To apply the change we need to Disconnect from the network and rejoin again. Then check the static IP from terminal. 
+
+![alt text](<../Images/Kali Linux Configuration and Crowbar Installation (4).png>)
+
+- We can check for connectivity by pinging `[google.com](http://google.com)` or our splunk server `192.168.10.10`
+
+## **5.2. Install Crowbar to Simulate Brute Force Attack Attack**
+
+- Update and Upgrade Kali Linux `sudo apt-get update && sudo apt-get upgrade -y`
+- move to desktop, make a folder called ad-project (`mkdir ad-project`)
+- install crowbar (`sudo apt-get install -y crowbar`)
+- navigate to `cd /usr/share/wordlists`  .
+- type ls and gunzip the `rockyou.txt.gz`  using  `sudo gunzip rockyou.txt.gz` . type ls again and we will have the `rockyou.txt` file.
+
+![alt text](<../Images/Crowbar Installation.png>)
+
+- copy `rockyou.txt` file to ad-project folder using  `cp rockyou.txt ~/Desktop/ad-project`
+- take the first 20 line by typing `head -n 20 rockyou.txt > passwords.txt`
+
+## **5.3. Enable Remote Desktop**
+
+- On our target machine we will enabling the remote desktop by searching “This PC” > Properties > Advance System Settings > log-in using administrator > click “Remote” > Click Allow remote connections to this computer > Select User > add > enter our user username (tsmith, jsmith)> click ‘Check’ > ok > ok > apply.
+
+![alt text](<../Images/Enable RDP (2).png>)
+
+![alt text](<../Images/Enable RDP (1).png>)
+
+## **5.4. Simulate Attack**
+- Navigate back to our Kali Machine, then type `crowbar -h`  to see the help menu.
+- Crowbar is a brute force tool which supports OpenVPN, Remote Desktop Protocol, SSH Private Keys and VNC Keys. (That’s why we enable the remote desktop and using crowbar)
+- In this simulation we will targeting tsmith. Run `crowbar -b rdp -u tsmith -C passwords.txt -s 192.168.10.100/32`
+    - -b : to choose protocol
+    - -u : to choose the username of target
+    - -C : to specify a password list file
+    - -s : specify source target IP
+    - /  : CIDR (Classless Inter-Domain Routing) is a method for representing IP addresses and their associated network masks.
+    - /32,  indicates that there is no room for other hosts in the network; it is a single IP address. This is often used for specific routing purposes, such as when you want to route traffic to a particular device or when configuring firewall rules.
+    - if **/24** would mean that the first 24 bits of the address are used for the network, which would allow for 256 addresses (from **`192.168.10.0`** to **`192.168.10.255`**). This is typically used for a subnet that can accommodate multiple hosts.
+
+## **5.5. Analyze Telemetry Using Splunk**
+
+- Open splunk server on browser and login
+- Search endpoint index using `index=endpoint` key word
+- Splunk will provide us with information of something happened to Terry's account we can also add `tsmith`.
+- Scroll down and select `EventCode` there is an event with Value `4625` stands out.
+
+![alt text](<../Images/Crowbar Bruteforce Attack (1).png>)
+
+- Using your search engine to search value 4625, https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4625
+- 4625 indicates Account Failed to Log on, and it can be noted all of the counts are occurring at approximately the same time which is an indication of brute force activity
+
+![alt text](<../Images/Crowbar Bruteforce Attack (3).png>)
+
+- Using your search engine to search value 4624, https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4624 , it indicate Account was successfully logged on.
+
+![alt text](<../Images/Crowbar Bruteforce Attack (2).png>)
+
+## **5.6. Run Tests on the Target Machine using Atomic Red Team (ART)**
+
+- On target machine, open Powershell using administrator. Run `Set-ExecutionPolicy Bypass CurrentUser` > `Y`
+- Navigate to Windows Security > Virus & threat protection > Manage Settings > Add or Remove Exclusions > Add an exclusion > Folder > This PC > Local Disk (C:).
+- Navigate back to Powershell, run: `IEX ( IWR 'https://raw.githubusercontent.com/redcanaryco/invoke-atomicredteam/master/install-atomicredteam.ps1' -UseBasicParsing);` >`Install-AtomicRedTeam -getAtomics` and `Y`.
+- Next, go to the (C:) drive > AtomicRedTeam > Atomics. You can also visit https://attack.mitre.org/ to explore adversary attacks and techniques, which can serve as a reference for the "T" values.
+- In this example we will use `T1136.001` which is test for persistence by creating a local account. (`Invoke-AtomicTest T1136.001`)
+
+![alt text](<../Images/Atomic Test T1059 (2).png>)
+
+- Check to splunk, by searching index=endpoint NewLocalUser 
+
+![alt text](<../Images/Atomic Test T1059 (3).png>)
+
+- This indicate that we have just identified a gap in our protection to detect this activity. if an attacker compromise our system and created local account with current settings, we won’t be able to detect it.
+- AtomicRedTeam help us to indentify gaps and visibility and generate Telemetry to see if our system can actually detect that activity.
+- Next we will try using T1059 (Command and Scripting Interpreter).  `Invoke-AtomicTest T1059.001`
+
+![alt text](<../Images/Atomic Test T1059 (4).png>)
+
+- Defender is catching some threat.
+- Bypass no profile
+
+![alt text](<../Images/Atomic Test T1059 (2).png>)
+
+- At splnuk we get the bypass noprofile by searching powershell
+
+![alt text](<../Images/Atomic Test T1059 (1).png>)
+
+- If we search for NewLocalUser
+
+![alt text](<../Images/Atomic Test T1059 (5).png>)
