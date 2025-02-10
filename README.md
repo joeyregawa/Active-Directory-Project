@@ -4,7 +4,9 @@ Welcome to the Active Directory Project repository!
 
 This project will run a virtual environment using Oracle VM VirtualBox, including VMs for Windows 10, Kali Linux, Windows Server, and Ubuntu Server. Network settings are configured to allow communication through IP addresses and NAT Networks. For security, Splunk Server is used for log analysis, Universal Forwarder for data forwarding, and Sysmon for endpoint monitoring. Testing involves Crowbar for brute force attacks, Atomic Red Team (ART) for general assessments, and Splunk for log analysis. The Windows machines are integrated into an Active Directory domain with Remote Desktop enabled. PowerShell scripting automates various tasks, facilitating a hands-on approach to exploring cybersecurity concepts and tools in a controlled environment.
 
-This project was greatly enhanced by the insights and tutorials from the [MyDFIR](https://www.youtube.com/playlist?list=PLEd_qaF8wpnXgdngqfsQtYYGM-IdtuxmC) YouTube channel. Their detailed videos played a crucial role in understanding and executing the different elements of the Active Directory Project.
+This project was greatly enhanced by the insights and tutorials from the [MyDFIR](https://www.youtube.com/@MyDFIR) YouTube channel. Their detailed videos played a crucial role in understanding and executing the different elements of the Active Directory Project.
+
+## **[Click here to visit Actvie Directory Project Setup!](./Active%20Directory%20Project%20Setup/Setup.md)**
 
 # **1. Introduction**
 ## **1.1. Overview**
