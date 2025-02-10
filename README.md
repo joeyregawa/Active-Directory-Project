@@ -11,7 +11,8 @@ This project was greatly enhanced by the insights and tutorials from the [MyDFIR
 Active Directory Project is focused on creating an Active Directory.  Active Directory is used as database contain user computers groups  etc. In order to use active directory, a Server must install a service called Active Directory domain services /ADDS and than the server must be promoted to Domain Controller / DC. so it can do authentication using protocol called Kerberos and authorization for our domain.
 
 ### Active Directory Project Diagram: ###!
-[alt text](<Images/Active Directory Diagram.jpg>)
+
+![alt text](<Images/Active Directory Diagram.jpg>)
 
 
 
