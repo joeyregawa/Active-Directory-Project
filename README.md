@@ -44,11 +44,43 @@ This project will showcase the use of Active Directory, which is used as databas
 
 ## **3.1. Visual Representation**
 
+### **3.1.1. WIndows Active Directory User Creation** 
 
+![alt text](<Images/User Creation 1 .png>)
 
+![alt text](<Images/User Creation 2.png>)
 
+### **3.1.2. Enable Remote Desktop** 
 
+![alt text](<Images/Enable RDP (1).png>)
 
+![alt text](<Images/Enable RDP (2).png>)
 
+### **3.1.3. Analyze Telemetry Using Splunk** 
 
+*note: simulate attack with crowbar*
 
+![alt text](<Images/Crowbar Bruteforce Attack (1).png>)
+
+![alt text](<Images/Crowbar Bruteforce Attack (2).png>)
+
+![alt text](<Images/Crowbar Bruteforce Attack (3).png>)
+
+![alt text](<Images/Crowbar Bruteforce Attack (4).png>)
+
+### **3.1.4. Atomic Red Team Test**
+
+![alt text](<Images/Atomic Test T1136.001 (2).png>)
+
+![alt text](<Images/Atomic Test T1136.001 (3).png>)
+*this indicate that we have just identified a gap in our protection to detect this activity. if an attacker compromise our system and created local account with current settings, we won’t be able to detect it.*
+
+ref 3.1: Test for Persistence by Creating a Local Account
+
+![alt text](<Images/Atomic Test T1059 (2).png>)
+
+![alt text](<Images/Atomic Test T1059 (3).png>)
+
+![alt text](<Images/Atomic Test T1059 (1).png>)
+
+ref 3.2: Test for Command and Scripting Interpreter
