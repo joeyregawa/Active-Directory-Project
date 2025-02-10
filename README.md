@@ -50,11 +50,15 @@ This project will showcase the use of Active Directory, which is used as databas
 
 ![alt text](<Images/User Creation 2.png>)
 
+ref 1: Actvie Directory Settings
+
 ### **3.1.2. Enable Remote Desktop** 
 
 ![alt text](<Images/Enable RDP (1).png>)
 
 ![alt text](<Images/Enable RDP (2).png>)
+
+ref 2: RDP Settings
 
 ### **3.1.3. Analyze Telemetry Using Splunk** 
 
@@ -68,6 +72,8 @@ This project will showcase the use of Active Directory, which is used as databas
 
 ![alt text](<Images/Crowbar Bruteforce Attack (4).png>)
 
+ref 3: Test for RDP Bruteforce Attack 
+
 ### **3.1.4. Atomic Red Team Test**
 
 ![alt text](<Images/Atomic Test T1136.001 (2).png>)
@@ -75,7 +81,7 @@ This project will showcase the use of Active Directory, which is used as databas
 ![alt text](<Images/Atomic Test T1136.001 (3).png>)
 *this indicate that we have just identified a gap in our protection to detect this activity. if an attacker compromise our system and created local account with current settings, we won’t be able to detect it.*
 
-ref 3.1: Test for Persistence by Creating a Local Account
+ref 4.1: Test for Persistence by Creating a Local Account
 
 ![alt text](<Images/Atomic Test T1059 (2).png>)
 
@@ -83,4 +89,22 @@ ref 3.1: Test for Persistence by Creating a Local Account
 
 ![alt text](<Images/Atomic Test T1059 (1).png>)
 
-ref 3.2: Test for Command and Scripting Interpreter
+ref 4.2: Test for Command and Scripting Interpreter
+
+# **4. Conclusion**
+
+We have successfully set up and configured a service called Active Directory domain services /ADDS and than the server must be promoted to Domain Controller / DC. So it can do authentication using protocol called Kerberos and authorization for our domain. Then successfully integrate it with Splunk to enable log analyst with Bructefore Attack Simulation (crowbar) and ART (Atomic Red Team) to perform general assessments of our system.
+
+- Configuring and setting up a Windows 10 Server with Sysmon to generate comprehensive event data, splunk universal forwarder for forwarding data to Splunk and ADDS and promoted a Domain Controller so it can do authentication using protocol called Kerberos and authorization for our domain.
+- Configuring and setting up a Windows 10 Target Machine with Sysmon to generate comprehensive event data, splunk universal forwarder for forwarding data to Splunk and join the Target Machine to Domain Server.
+- Deploying Splunk server for analyzing and monitoring logs.
+- Perfrom bruteforce attack using Crowbar and general assessment using ART / Atomic Red Team on Target Machine 
+
+This project has provided valuable hands-on experience in implementing Active Directory workflow using powerful open-source tools. We can now apply this knowledge to enhance the organization's Active Directory System.
+
+# **5. Refferences**
+- https://youtu.be/mWqYyl89QaY?si=clMEfPK_5sLtnQeW
+- https://youtu.be/2cEj3bS5C0Q?si=_5U9Ilp8aC8QobYD
+- https://youtu.be/uXRxoPKX65Q?si=VMFiQvaMDRCzGXDv
+- https://youtu.be/1XeDht_B-bA?si=eUlE4WOloqR-RKua
+- https://youtu.be/orq-OPIdV9M?si=UMoVp8qovNSK-Y52
