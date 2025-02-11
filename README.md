@@ -6,7 +6,7 @@ This project will run a virtual environment using Oracle VM VirtualBox, includin
 
 This project was greatly enhanced by the insights and tutorials from the [MyDFIR](https://www.youtube.com/@MyDFIR) YouTube channel. Their detailed videos played a crucial role in understanding and executing the different elements of the Active Directory Project.
 
-## **[Click here to visit Actvie Directory Project Setup!](./Active%20Directory%20Project%20Setup/Setup.md)**
+## **[Click here to visit Active Directory Project Setup!](./Active%20Directory%20Project%20Setup/Setup.md)**
 
 # **1. Introduction**
 ## **1.1. Overview**
