@@ -273,9 +273,13 @@ objective:
 - Using your search engine to search value 4625, https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventID=4625
 - 4625 indicates Account Failed to Log on, and it can be noted all of the counts are occurring at approximately the same time which is an indication of brute force activity
 
+![alt text](<../Images/Crowbar Bruteforce Attack (4).png>)
+
 ![alt text](<../Images/Crowbar Bruteforce Attack (3).png>)
 
 - Using your search engine to search value 4624, https://www.ultimatewindowssecurity.com/securitylog/encyclopedia/event.aspx?eventid=4624 , it indicate Account was successfully logged on.
+
+![alt text](<../Images/Crowbar Bruteforce Attack (5).png>)
 
 ![alt text](<../Images/Crowbar Bruteforce Attack (2).png>)
 
